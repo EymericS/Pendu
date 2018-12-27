@@ -1,18 +1,18 @@
 #include "header/pendu.h"
 
 //TODO: Choisir un mot dans le dico
-void mot_Mystere(char * mot) {
+char * mot_Mystere() {
     //TODO: recherche dans le fichier
     //TODO: en majuscule
-    char pendu[] = "AVION"; //FIXME:
-    printf("\n-> mot mystere, pendu : %s\n", pendu);
 
-    // Creation d'un tableau dynamique a partir d pointeur 
-    mot = malloc((strlen(pendu)+1) * sizeof(char));
+    char mot[] = "AVION"; //FIXME:
 
-    // Remplie le tableau dyn avec le mot
-    strcpy(mot, pendu);
-    printf("\n-> mot copie, mot : %s\n", mot);
+    char *buffer = malloc(strlen(mot) + 1);
+
+    if(buffer != NULL) 
+        strcpy(buffer, mot);
+
+    return buffer;
 }
 
 //TODO: lire un caractère de l'utilisateur

@@ -5,6 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-void mot_Mystere(char *mot);
+char * mot_Mystere();
 
 #endif

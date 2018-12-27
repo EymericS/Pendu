@@ -15,11 +15,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 
 #define DICTIONNAIRE "asset/dictionnaire.txt" //! \def Chemin vers le fichier contenant le dictionnaire
+#define TAILLE_MAX_CHAINE 50 //! \def Nombre de caractere maximum d'une chaine de caractere
 
-char lireCaractere();
+char lireCaractere() ;
 
-char * mot_Mystere();
+char * mot_Mystere() ;
+
+void loop_partie() ;
 
 #endif

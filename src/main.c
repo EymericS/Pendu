@@ -25,16 +25,9 @@ int main( int argc, char *argv[] ) {
     (void)argc;
     (void)argv;
 
-    char *mot = mot_Mystere();
-    printf("\nLe mot choisi est : %s\n\n", mot);
+    loop_partie();
 
-
-    printf("Entrer un caractere : ");
-    char test = lireCaractere();
-    printf("Vous avez saisie : %c\n\n", test);
-
-    if(mot != NULL)
-        free(mot);
+    
 
     return EXIT_SUCCESS;
 }

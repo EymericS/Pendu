@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "pendu.h": "c",
+        "ctype.h": "c"
+    }
+}

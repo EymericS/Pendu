@@ -35,7 +35,7 @@ conv = $(subst /,$(SLASH),$(1))
 
 all: $(EXEC)
 
-DEPS = $(OBJ_DIR_SYS)/main.o $(OBJ_DIR_SYS)/pendu.o
+DEPS = $(OBJ_DIR_SYS)/main.o $(OBJ_DIR_SYS)/pendu.o $(OBJ_DIR_SYS)/chaineCaractere.o
 $(EXEC): $(DEPS) $(BIN_DIR_SYS)/.dirstamp
 	@echo Linking of $(call conv,$(DEPS)) for $(call conv,$@) ...
 	@$(LD) $(LDFLAGS) $(DEPS) -o $@
@@ -51,6 +51,10 @@ $(OBJ_DIR_SYS)/pendu.o: $(SRC_DIR)/pendu.c $(INC_DIR)/pendu.h $(OBJ_DIR_SYS)/.di
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo Building done !
 
+$(OBJ_DIR_SYS)/chaineCaractere.o: $(SRC_DIR)/chaineCaractere.c $(INC_DIR)/chaineCaractere.h $(OBJ_DIR_SYS)/.dirstamp
+	@echo Building of $(call conv,$@) ...
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo Building done !
 
 .PRECIOUS: %/.dirstamp
 %/.dirstamp:
@@ -75,4 +79,4 @@ mrproper: clean
 .PHONY: run
 run:
 	@echo Running $(call conv,$(EXEC)) ...
-	./$(EXEC)
+	@./$(EXEC)

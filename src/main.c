@@ -11,9 +11,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "header/pendu.h"
+#include "header/chaineCaractere.h"
 
 /**
- * \fn int main (void)
  * \brief Entree du programme.
  * 
  * \param argc Nombre d'entree du programme
@@ -26,8 +26,6 @@ int main( int argc, char *argv[] ) {
     (void)argv;
 
     loop_partie();
-
-    
 
     return EXIT_SUCCESS;
 }

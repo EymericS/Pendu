@@ -11,7 +11,6 @@
 
 #include "header/pendu.h"
 
-
 /**
  * \brief Lit et retourne le premier caractere saisie par l'utilisateur (Transforme en majuscule)
  * 
@@ -25,8 +24,6 @@ char lireCaractere() {
     return caractere;
 }
 
-//TODO: Choisir un mot dans le dico
-
 /**
  * \brief Renvoie un mot choisi au hazard dans le DICTIONNAIRE
  * 
@@ -35,10 +32,12 @@ char lireCaractere() {
 char * mot_Mystere() {
     FILE* dico = NULL;
     char mot[TAILLE_MAX_CHAINE] = "";
+
     if((dico = fopen(DICTIONNAIRE, "r")) != NULL) {
         char ligne[TAILLE_MAX_CHAINE] = "";
         int nb_ligne = 0;
         int ligneChoisi = 0;
+
         srand(time(NULL));
 
         while(fgets(ligne, TAILLE_MAX_CHAINE, dico) != NULL)
@@ -46,12 +45,11 @@ char * mot_Mystere() {
 
         rewind(dico);
         ligneChoisi = rand()%nb_ligne;
-        printf("ligneChoisi = %d\n", ligneChoisi);
+
         while(ligneChoisi && fgets(ligne, TAILLE_MAX_CHAINE, dico) != NULL)
             ligneChoisi--;
 
         fgets(mot, TAILLE_MAX_CHAINE, dico);
-        printf("Le mot est %s\n", mot);
 
         fclose(dico);
     }
@@ -59,55 +57,47 @@ char * mot_Mystere() {
         printf("Impossible d'ouvire le fichier %s", DICTIONNAIRE);
     }
 
-    char *buffer = malloc(strlen(mot) + 1);
+    char *buffer = malloc(strlen(mot)); // On enleve la place du '\n'
 
     if(buffer != NULL) 
         strcpy(buffer, mot);
 
+    buffer[strlen(mot)-1] = '\0'; // On remplace \n par \0 la chaine
+
     return buffer;
 }
 
+/**
+ * \brief Boucle de deroulement d'une partie de pendu
+ * 
+ */
 void loop_partie() {
     int coup = 10;
-    char *motMystere = mot_Mystere();
-    char motJoueur[strlen(motMystere)];
-    for(unsigned int i=0;i<strlen(motMystere);i++)
-        motJoueur[i] = '*';
+    char *motMystere = mot_Mystere(); // Creation du mot mystere
+    char motJoueur[strlen(motMystere)+1];
+    motJoueur[0] = '\0';
+    char saisieJoueur = 0;
+
+    for(unsigned int i = 0 ; i < strlen(motMystere) ; i++)
+        strcat(motJoueur, "*");
     
-    motJoueur[strlen(motMystere)] = '\0';
+    motJoueur[strlen(motJoueur)] = '\0'; // Creation du mot joueur
 
-    printf("\nBienvenue dans le Pendu !\n\n");
-    printf("Le mot mystere est %s\n", motMystere);
-    printf("Votre mot est %s\n", motJoueur);
+    printf("\nBienvenue dans le Pendu !\n");
 
-    /*
-    while(coup && !action_joueur()) {
-        coup--;
-        affichage_etat_partie(coup)
+    while (coup && strcmp(motJoueur, motMystere)) {
+        printf("\nIl vous reste %d coups a jouer\n", coup);
+        printf("Quel est le mot secret ? %s\n", motJoueur);
+        printf("Proposez une lettre : ");
+        saisieJoueur = lireCaractere();
+        coup -= verifie_lettre(motMystere, motJoueur, saisieJoueur);
     }
-    */
-    if(motMystere != NULL)
+    
+    if(coup)
+        printf("\nGagne ! Le mot secret etait bien : %s ( %s ) !\n", motMystere, motJoueur);
+    else
+        printf("\nPerdu ! Vous n'avez plus de coup a jouer. Le mot secret etait : %s ( %s ) !\n", motMystere, motJoueur);
+
+    if(motMystere != NULL) 
         free(motMystere);
 }
-
-//TODO: verifie sir le caractere est present dans dans la chaine mystere
-// - si oui on affiche le ou les emplacement de la lettre
-// - si non on enleve 1 vie ( si vie = 0 on arrete)
-
-
-//TODO: affichage_etat_partie
-/*
-Bienvenue dans le Pendu ! -> debut
- 
-Il vous reste 10 coups a jouer -> info vie joueur -> 1
-Quel est le mot secret ? ****** -> affichage de létat d'avancement pour le joueur -> 2
-Proposez une lettre : E -> demande une lettre au joueur -> 3
-
-#### Boucle a-2-3 ####
-(informer du dernier cou^p)
-
-Gagne ! Le mot secret etait bien : MARRON -> joueur gagne -> fin jeu
-Perdu ! Vous n'avez plus de coup a jouer. Le mot secret etait : MARRON
-
-*/
-//TODO: boucle partie

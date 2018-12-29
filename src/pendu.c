@@ -2,8 +2,8 @@
  * \file pendu.c
  * \brief Fichier d'implementation 
  * \author Eymeric S.
- * \version 0.1
- * \date 27 decembre 2018
+ * \version 1.5
+ * \date 30 decembre 2018
  * 
  * Fichier contenant l'implementation des fonctions pour l'application du 'Pendu'
  * 
@@ -72,32 +72,101 @@ char * mot_Mystere() {
  * 
  */
 void loop_partie() {
+    char choix = 0;
     int coup = 10;
-    char *motMystere = mot_Mystere(); // Creation du mot mystere
-    char motJoueur[strlen(motMystere)+1];
-    motJoueur[0] = '\0';
-    char saisieJoueur = 0;
 
-    for(unsigned int i = 0 ; i < strlen(motMystere) ; i++)
-        strcat(motJoueur, "*");
-    
-    motJoueur[strlen(motJoueur)] = '\0'; // Creation du mot joueur
+    do {
+        printf("\nMode disponible :\n");
+        printf("\t1 - Solo\n");
+        printf("\t2 - Duo\n");
+        printf("\tq - Exit\n");
+        printf("Quel mode voulez-vous ? ");
+        scanf("%c", &choix);
+        while(getchar() != '\n');
 
-    printf("\nBienvenue dans le Pendu !\n");
+        if(choix == '1'){ // Mode solo
+            printf("\nVous commencer un nouvelle partie !\n");
+            choix = 'q';
+            char saisieJoueur = 0;
+            char *motMystere = mot_Mystere(); // Creation du mot mystere
+            char motJoueur[strlen(motMystere)+1];
+            motJoueur[0] = '\0';
 
-    while (coup && strcmp(motJoueur, motMystere)) {
-        printf("\nIl vous reste %d coups a jouer\n", coup);
-        printf("Quel est le mot secret ? %s\n", motJoueur);
-        printf("Proposez une lettre : ");
-        saisieJoueur = lireCaractere();
-        coup -= verifie_lettre(motMystere, motJoueur, saisieJoueur);
-    }
-    
-    if(coup)
-        printf("\nGagne ! Le mot secret etait bien : %s ( %s ) !\n", motMystere, motJoueur);
-    else
-        printf("\nPerdu ! Vous n'avez plus de coup a jouer. Le mot secret etait : %s ( %s ) !\n", motMystere, motJoueur);
+            for(unsigned int i = 0 ; i < strlen(motMystere) ; i++)
+                strcat(motJoueur, "*");
+            
+            motJoueur[strlen(motJoueur)] = '\0'; // Creation du mot joueur
 
-    if(motMystere != NULL) 
-        free(motMystere);
+            while (coup && strcmp(motJoueur, motMystere)) {
+                printf("\nIl vous reste %d coups a jouer\n", coup);
+                printf("Quel est le mot secret ? %s\n", motJoueur);
+                printf("Proposez une lettre : ");
+                saisieJoueur = lireCaractere();
+                coup -= verifie_lettre(motMystere, motJoueur, saisieJoueur);
+            }
+            
+            if(coup)
+                printf("\nGagne ! Le mot secret etait bien : %s ( %s ) !\n", motMystere, motJoueur);
+            else
+                printf("\nPerdu ! Vous n'avez plus de coup a jouer. Le mot secret etait : %s ( %s ) !\n", motMystere, motJoueur);
+
+            if(motMystere != NULL) 
+                free(motMystere);
+
+        }
+        else if(choix == '2') { // Mode duo
+            printf("\nVous commencer un nouvelle partie !\n");
+            choix = 'q';
+            char saisieJoueur = 0;
+            char motMystere[TAILLE_MAX_CHAINE];
+            printf("\nMerci de choisir le mot a trouver (%d caractere max): ", TAILLE_MAX_CHAINE);
+            fgets(motMystere, TAILLE_MAX_CHAINE, stdin);
+            motMystere[strlen(motMystere)-1] = '\0';
+            str_toupper(motMystere);
+            
+            char motJoueur[strlen(motMystere)+1];
+            motJoueur[0] = '\0';
+
+            for(unsigned int i = 0 ; i < strlen(motMystere) ; i++)
+                strcat(motJoueur, "*");
+            
+            motJoueur[strlen(motJoueur)] = '\0'; // Creation du mot joueur
+            clear_term();
+
+            while (coup && strcmp(motJoueur, motMystere)) {
+                printf("\nIl vous reste %d coups a jouer\n", coup);
+                printf("Quel est le mot secret ? %s\n", motJoueur);
+                printf("Proposez une lettre : ");
+                saisieJoueur = lireCaractere();
+                coup -= verifie_lettre(motMystere, motJoueur, saisieJoueur);
+            }
+            
+            if(coup)
+                printf("\nGagne ! Le mot secret etait bien : %s ( %s ) !\n", motMystere, motJoueur);
+            else
+                printf("\nPerdu ! Vous n'avez plus de coup a jouer. Le mot secret etait : %s ( %s ) !\n", motMystere, motJoueur);
+ 
+        }
+        else if(choix =='q') ;
+        else {
+            choix = -1;
+            printf("%c n'est pas un choix valide !\n", choix);
+        }
+
+    }while(choix != 'q');
+
+}
+
+/**
+ * \brief Vide l'affichage du termnial
+ * 
+ */
+void clear_term() {
+    #ifdef _WIN32
+    system("cls");
+    #elif defined(unix) || defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__))
+    system("clear");
+    #else
+        #error "OS not supported."
+    #endif
 }

@@ -2,7 +2,7 @@
  * \file chaineCaractere.c
  * \brief Fichier d'implementation 
  * \author Eymeric S.
- * \version 0.1
+ * \version 1.5
  * \date 27 decembre 2018
  * 
  * Fichier contenant l'implementation des fonctions pour la manipulation de chaine de caractere
@@ -30,7 +30,7 @@ void chaine_pop( char chaine[], int mode) {
 }
 
 /**
- * \brief verifie le nombre de fois q'une lettre 'c' est presente dans 'mot' modifie 'recherche' en consequance
+ * \brief Verifie le nombre de fois q'une lettre 'c' est presente dans 'mot' modifie 'recherche' en consequance
  * 
  * \param mot Tableau de caractere ou chercher
  * \param recherche Tableau de caractere a modifier si besoin
@@ -56,4 +56,16 @@ int verifie_lettre(char mot[], char recherche[], char c) {
     }
 
     return res;
+}
+
+/**
+ * \brief Applique toupper sur une chaine complete
+ * 
+ * \param str Chaine de caractere
+ * 
+ */
+void str_toupper(char str[]) {
+    for(unsigned int i = 0 ; i < strlen(str) ; i++ ) {
+        str[i] = toupper(str[i]);
+    }
 }

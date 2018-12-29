@@ -2,7 +2,7 @@
  * \file main.c
  * \brief Jeu du Pendu
  * \author Eymeric S.
- * \version 0.1
+ * \version 1.1
  * \date 27 decembre 2018
  * 
  * Programme pour l'application du jeu du Pendu
@@ -24,8 +24,30 @@
 int main( int argc, char *argv[] ) {
     (void)argc;
     (void)argv;
+    int partie = 0;
+    char choix = 0;
 
-    loop_partie();
+    printf("\nBienvenue dans le Pendu !\n");
+
+    do {
+        printf("\nJouer une nouvelle partie ? (o/n) : ");
+        scanf("%c", &choix);
+        while(getchar() != '\n');
+
+        if(choix == 'o' || choix == 'O') {
+            partie = 1;
+            loop_partie();
+        }
+        else if(choix == 'n' || choix == 'N')
+            partie = 0;
+        else {
+            partie = -1;
+            printf("%c n'est pas un choix valide !\n", choix);
+        }
+
+    }while(partie);
+    
+    printf("\nA une prochaine !\n");
 
     return EXIT_SUCCESS;
 }

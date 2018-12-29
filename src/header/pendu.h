@@ -5,7 +5,7 @@
  * \file pendu.h
  * \brief Fichier declaration
  * \author Eymeric S.
- * \version 0.1
+ * \version 1.5
  * \date 27 decembre 2018
  * 
  * Fichier contenant la declaration des fonctions et variable et/ou constante pour l'application du 'Pendu'
@@ -24,5 +24,6 @@
 char lireCaractere() ;
 char * mot_Mystere() ;
 void loop_partie() ;
+void clear_term() ;
 
 #endif

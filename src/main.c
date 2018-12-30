@@ -2,8 +2,8 @@
  * \file main.c
  * \brief Jeu du Pendu
  * \author Eymeric S.
- * \version 1.1
- * \date 27 decembre 2018
+ * \version 1.2
+ * \date 30 decembre 2018
  * 
  * Programme pour l'application du jeu du Pendu
  * 

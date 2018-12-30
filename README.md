@@ -1,6 +1,8 @@
-# PENDU ( console )
+# PENDU ( console ) v1.2
 
 Short C project, made to learn
+
+* MOOC available [HERE](https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c/16828-tp-realisation-dun-pendu) - Page of the class
 
 ## Getting Started
 
@@ -36,6 +38,10 @@ Each word of the game is a line of the text file /asset/dictionnaire.txt
 
 ## Some pictures of
 
+Screen shot for good end in version 1.1
 ![Image of a nice game](/asset/successGame.png)
+Screen shot for bad end in version 1.1
 ![Image of a bad game](/asset/badGame.png)
+Screen shot for bad end in version 1.2
+![Image of a bad game with draw](/asset/wDraw.png)
 

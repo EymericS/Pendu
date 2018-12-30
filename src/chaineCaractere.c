@@ -3,7 +3,7 @@
  * \brief Fichier d'implementation 
  * \author Eymeric S.
  * \version 1.5
- * \date 27 decembre 2018
+ * \date 30 decembre 2018
  * 
  * Fichier contenant l'implementation des fonctions pour la manipulation de chaine de caractere
  * 

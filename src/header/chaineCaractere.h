@@ -6,7 +6,7 @@
  * \brief Fichier declaration
  * \author Eymeric S.
  * \version 1.5
- * \date 27 decembre 2018
+ * \date 30 decembre 2018
  * 
  * Fichier contenant la declaration des fonctions et variable et/ou constante pour la manipulation de chaine de caractere
  * 

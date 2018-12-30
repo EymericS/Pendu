@@ -2,7 +2,7 @@
  * \file pendu.c
  * \brief Fichier d'implementation 
  * \author Eymeric S.
- * \version 1.5
+ * \version 1.7
  * \date 30 decembre 2018
  * 
  * Fichier contenant l'implementation des fonctions pour l'application du 'Pendu'
@@ -85,7 +85,7 @@ void loop_partie() {
         while(getchar() != '\n');
 
         if(choix == '1'){ // Mode solo
-            printf("\nVous commencer un nouvelle partie !\n");
+            printf("\nVous commencer un nouvelle partie solo !\n");
             choix = 'q';
             char saisieJoueur = 0;
             char *motMystere = mot_Mystere(); // Creation du mot mystere
@@ -103,6 +103,8 @@ void loop_partie() {
                 printf("Proposez une lettre : ");
                 saisieJoueur = lireCaractere();
                 coup -= verifie_lettre(motMystere, motJoueur, saisieJoueur);
+                printf("\n");
+                affichage_pendu(coup);
             }
             
             if(coup)
@@ -115,7 +117,7 @@ void loop_partie() {
 
         }
         else if(choix == '2') { // Mode duo
-            printf("\nVous commencer un nouvelle partie !\n");
+            printf("\nVous commencer un nouvelle partie duo !\n");
             choix = 'q';
             char saisieJoueur = 0;
             char motMystere[TAILLE_MAX_CHAINE];
@@ -139,6 +141,8 @@ void loop_partie() {
                 printf("Proposez une lettre : ");
                 saisieJoueur = lireCaractere();
                 coup -= verifie_lettre(motMystere, motJoueur, saisieJoueur);
+                printf("\n");
+                affichage_pendu(coup);
             }
             
             if(coup)
@@ -169,4 +173,87 @@ void clear_term() {
     #else
         #error "OS not supported."
     #endif
+}
+
+/**
+ * \brief Affiche un pendu suivant l'etat de la partie
+ * 
+ * \param x Entier - Etat de la partie
+ * 
+ */
+void affichage_pendu(int x) {
+    if(x == 10) ;
+    else if(x == 9) {
+        printf("\t======\n");
+    }
+    else if(x == 8) {
+        printf("\t=============\n");
+    }
+    else if(x == 7) {
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t=============\n");
+    }
+    else if(x == 6) {
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t=============\n");
+    }
+    else if(x == 5) {
+        printf("\t======\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t=============\n");
+    }
+    else if(x == 4) {
+        printf("\t===========\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t=============\n");
+    }
+    else if(x == 3) {
+        printf("\t===========\n");
+        printf("\t ||\n");
+        printf("\t ||\t 0\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t=============\n");
+    }
+    else if(x == 2) {
+        printf("\t===========\n");
+        printf("\t ||\n");
+        printf("\t ||\t 0\n");
+        printf("\t ||\t/|\\\n");
+        printf("\t ||\n");
+        printf("\t ||\n");
+        printf("\t=============\n");
+    }
+    else if(x == 1) {
+        printf("\t===========\n");
+        printf("\t ||\n");
+        printf("\t ||\t 0\n");
+        printf("\t ||\t/|\\\n");
+        printf("\t ||\t/ \\\n");
+        printf("\t ||\n");
+        printf("\t=============\n");
+    }
+    else if(x == 0) {
+        printf("\t===========\n");
+        printf("\t ||\t |\n");
+        printf("\t ||\t 0\n");
+        printf("\t ||\t/|\\\n");
+        printf("\t ||\t/ \\\n");
+        printf("\t ||\n");
+        printf("\t=============\n");
+    }
 }

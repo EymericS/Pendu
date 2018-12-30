@@ -38,10 +38,10 @@ Each word of the game is a line of the text file /asset/dictionnaire.txt
 
 ## Some pictures of
 
-Screen shot for good end in version 1.1
-![Image of a nice game](/asset/successGame.png)
-Screen shot for bad end in version 1.1
-![Image of a bad game](/asset/badGame.png)
-Screen shot for bad end in version 1.2
-![Image of a bad game with draw](/asset/wDraw.png)
+Screen shot for good end in version 1.1  
+![Image of a nice game](/asset/successGame.png)  
+Screen shot for bad end in version 1.1  
+![Image of a bad game](/asset/badGame.png)  
+Screen shot for bad end in version 1.2  
+![Image of a bad game with draw](/asset/wDraw.png)  
 
